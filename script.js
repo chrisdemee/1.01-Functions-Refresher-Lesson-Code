@@ -12,13 +12,13 @@ function render (html) {
 */
 function greet () {
   // TODO: Write your code here
-  const name = prompt('What is your name?')
-  if(!name){
-    render("<p> No name given! </p>")
-    return
-  }
-  render(" <p> Hello ${name}. Nice to see you today! </p>")
+const name = prompt("What is your Name?")
+if(!name){
+  render("<p> No name Given!</p>")
   return
+}
+render(`<p>Hello, ${name}</p>`)
+
 }
 
 /* 
@@ -30,27 +30,22 @@ function greet () {
   - Display the average AND the list of numbers
 */
 function averageNumbers () {
-  const input = prompt('Enter a list of numbers, separated by commas:')
-  if (!input) {
-    render('<p>No numbers provided!</p>')
-    return
+  // TODO: Write your code here
+
+  const nums = prompt("Enter Numbers Seperated by Comas:")
+  if (!nums){
+    render("<p> No Numbers Given!</p>")
+  return
   }
-  const numStrings = input.split(',')
 
-  const numbers = numStrings.map(numStr => parseFloat(numStr.trim()))
+  const givenNums = nums.split(',').map(n => parseFloat(n.trim()))
 
-  const validNumbers = numbers.filter(num => !isNaN(num))
 
-  const list = givenNums.map(n => '<li class="list-group-item"> {n} </li>').join('')
-
-  if (validNumbers.length === 0) {
-
-    render('<p>No valid numbers provided!</p>')
-    return
-  }
-  const sum = validNumbers.reduce((acc, num) => acc + num, 0)
-  const average = sum / validNumbers.length
-  render(`<p> ${average}</p>`)
+  const sum = givenNums.reduce((a,b) => a + b, 0)
+  const avg = sum / givenNums.length
+  const list = givenNums.map(n => `<li class="list-group-item"> ${n} </li>`)
+render(`<p> Average: <strong> ${avg.toFixed(2)} </strong></p> 
+<ul class="list-group">${list}</ul>`)
 }
 
 /* 
@@ -62,12 +57,11 @@ function averageNumbers () {
 */
 function timeOfDay () {
   // TODO: Write your code here
-
   const h = new Date().getHours()
-   let msg = ''
-  if (h < 12) {msg = 'Top of the morning to you!'}
-  else if ( h < 18) {msg = 'Good afternoon!'}
-  else {msg = 'Good Evening'}
+  let msg = ''
+  if (h<12) {msg = 'Top of the morning'}
+  else if ( h < 18) {msg = 'Good Afternoon'}
+  else { msg = 'Good evening'}
   render(`<p> ${msg} </p>`)
 }
 
@@ -81,26 +75,30 @@ function timeOfDay () {
 */
 function randomBetween () {
   // TODO: Write your code here
-  const min = parseInt(prompt('Enter a MIN number'))
-  const max = parseInt(prompt('Enter a MAX number'))
+  const min = parseInt(prompt(`Enter a MIn Number`))
+  const max = parseInt(prompt(`Enter a Max Number`))
 
-  if (isNaN(min) || isNaN(max)) {
-    render(`<p class='text-danger'> Please enter valid numbers </p>`)
-}
-if(min > max){
-  render("<p class ='text-danger'> Min must be less than Max </p>")
-  return
+  if(isNaN(min) || isNaN(max)){
+    render("<p> Please Enter valid Number</p>")
+    return
+  }
+  if(min>max){
+      render(`<p class="text-danger"> Min is less than MAx</p>`)
+    return
+  }
+  const rndNum = Math.floor(Math.random()* (max-min + 1) + min )
+  render(
+    `<p> random number between ${min} and ${max}: <strong> ${rndNum}</strong></p>`
+  )
+
 }
 
-const rndNum = Math.floor(Math.random() * (max - min + 1) + min)
-}
 /* 
   Function 5 — clearOutput()
   ---------------------------
   - Clear whatever is inside #out
   - Replace it with a placeholder message like "Output cleared."
 */
-
 function clearOutput () {
   // TODO: Write your code here
 }
